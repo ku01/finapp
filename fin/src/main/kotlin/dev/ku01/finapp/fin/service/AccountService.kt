@@ -1,24 +1,25 @@
 package dev.ku01.finapp.fin.service
 
+import dev.ku01.finapp.fin.converter.toDto
+import dev.ku01.finapp.fin.converter.toEntity
 import dev.ku01.finapp.fin.dto.AccountDto
-import dev.ku01.finapp.fin.enum.Currency
+import dev.ku01.finapp.fin.entity.AccountEntity
+import dev.ku01.finapp.fin.repository.AccountRepository
 import org.springframework.stereotype.Service
-import java.math.BigDecimal
+import org.springframework.transaction.annotation.Transactional
 
 @Service
-class AccountService {
+class AccountService : AbstractEntityService<AccountEntity, AccountRepository>() {
 
-    fun getAll(project: Long): List<AccountDto> {
-        return listOf(AccountDto(
-            id = 1,
-            name = "Cash",
-            value = BigDecimal("100.0"),
-            currency = Currency.USD
-        ), AccountDto(
-            id = 2,
-            name = "Bank",
-            value = BigDecimal("1207.41"),
-            currency = Currency.USD
-        ))
+    @Transactional
+    fun create(projectId: Long, accountDto: AccountDto) {
+        repository.save(accountDto.toEntity().apply {
+            this.projectId = projectId
+        })
+    }
+
+    @Transactional(readOnly = true)
+    fun getAll(projectId: Long): List<AccountDto> {
+        return repository.findByProjectId(projectId).map { it.toDto() }
     }
 }

@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+  finapp-network:
+    driver: bridge
+
+services:
+
+  finapp:
+    image: finapp:latest
+    networks:
+      - finapp-network
+    ports:
+      - "8180:8080"
+    tmpfs:
+      - /var/lib/postgresql/data
+
+  finapp-postgres:
+    image: postgres:13.4-alpine
+    networks:
+      - finapp-network
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=finapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ${POSTGRES_DATA}:/var/lib/postgresql/data

@@ -2,17 +2,20 @@ package dev.ku01.finapp.fin.controller
 
 import dev.ku01.finapp.fin.dto.AccountDto
 import dev.ku01.finapp.fin.service.AccountService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/projects/{project}/accounts")
+@RequestMapping("/v1/projects/{projectId}/accounts")
 class AccountController(private val accountService: AccountService) {
 
+    @PostMapping
+    fun post(@PathVariable projectId: Long, @Validated @RequestBody accountDto: AccountDto) {
+        accountService.create(projectId, accountDto)
+    }
+
     @GetMapping
-    fun getAll(@PathVariable project: Long): List<AccountDto> {
-        return accountService.getAll(project)
+    fun getAll(@PathVariable projectId: Long): List<AccountDto> {
+        return accountService.getAll(projectId)
     }
 }

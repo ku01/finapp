@@ -1,6 +1,9 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val buildImage by extra { "docker://bellsoft/liberica-openjdk-alpine:11.0.6-10" }
+val liquibaseVer by extra { "4.9.1" }
+val postgresqlVer by extra { "42.3.3" }
+val jacksonModuleKotlinVer by extra { "2.13.2" }
 
 plugins {
 	kotlin("jvm") version "1.6.10"
