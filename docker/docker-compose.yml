@@ -20,7 +20,7 @@ services:
     networks:
       - finapp-network
     ports:
-      - "5432:5432"
+      - "5439:5432"
     environment:
       - POSTGRES_DB=finapp
       - POSTGRES_USER=postgres
