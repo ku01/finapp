@@ -14,6 +14,8 @@ services:
       - "8180:8080"
     tmpfs:
       - /var/lib/postgresql/data
+    depends_on:
+      - finapp-postgres
 
   finapp-postgres:
     image: postgres:13.4-alpine
