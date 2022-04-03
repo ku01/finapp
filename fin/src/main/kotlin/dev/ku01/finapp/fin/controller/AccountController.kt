@@ -6,11 +6,14 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/projects/{projectId}/accounts")
+@RequestMapping("/v1/project/{projectId}/account")
 class AccountController(private val accountService: AccountService) {
 
     @PostMapping
-    fun post(@PathVariable projectId: Long, @Validated @RequestBody accountDto: AccountDto) {
+    fun post(
+        @PathVariable projectId: Long,
+        @Validated @RequestBody accountDto: AccountDto
+    ) {
         accountService.create(projectId, accountDto)
     }
 

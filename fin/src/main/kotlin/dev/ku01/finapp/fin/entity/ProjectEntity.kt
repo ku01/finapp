@@ -6,7 +6,7 @@ import javax.persistence.*
 @Table(name = "project")
 class ProjectEntity(
     var name: String
-) {
+) : BaseAuditEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_generator")
     @SequenceGenerator(name = "project_generator", sequenceName = "project_sequence", allocationSize = 1)

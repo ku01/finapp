@@ -12,7 +12,7 @@ class AccountEntity(
     var value: BigDecimal,
     @Enumerated(EnumType.STRING)
     var currency: Currency
-) {
+) : BaseAuditEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_generator")
     @SequenceGenerator(name = "account_generator", sequenceName = "account_sequence", allocationSize = 1)

@@ -13,9 +13,7 @@ class AccountService : AbstractEntityService<AccountEntity, AccountRepository>()
 
     @Transactional
     fun create(projectId: Long, accountDto: AccountDto) {
-        repository.save(accountDto.toEntity().apply {
-            this.projectId = projectId
-        })
+        repository.save(accountDto.apply { this.projectId = projectId }.toEntity())
     }
 
     @Transactional(readOnly = true)

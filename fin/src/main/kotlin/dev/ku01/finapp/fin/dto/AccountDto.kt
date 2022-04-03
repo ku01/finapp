@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull
 data class AccountDto(
     val id: Long?,
     @get:NotNull
-    val projectId: Long?,
+    var projectId: Long?,
     @get:NotNull
     val name: String?,
     val value: BigDecimal?,

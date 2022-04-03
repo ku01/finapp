@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/v1/projects")
+@RequestMapping("/v1/project")
 class ProjectController(private val projectService: ProjectService) {
 
     @GetMapping("/{projectId}")
